@@ -1,0 +1,10 @@
+{
+  "name": "Jukely-Checker",
+  "description": "This is a NodeJS app to check and book your interested events",
+  "author": "charlieouyang",
+  "license": "ISC",
+  "main": "app.js",
+  "dependencies": {
+    "moment": "^2.11.1"
+  }
+}
