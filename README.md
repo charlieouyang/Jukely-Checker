@@ -32,15 +32,20 @@ moment@2.11.1 node_modules/moment
 ```
 
 ## Step 4
-Open up app.js file with your favorite editor and make some required changes.
+Open up Google Chrome and go to the Jukely website. Login using your Facebook. Then right click on the page and click on "Inspect Element". Then use the text search utility (Command F or Control F) to find two attributes: "_fb_uid" and "_fb_access_token". Here's a screenshot to show the 2 fields in Chrome.
+
+![alt tag](https://raw.github.com/charlieouyang/Jukely-Checker/blob/master/jukely-screenshot.png)
+
+## Step 5
+Open up app.js file with your favorite editor and copy and paste those two values into the file.
 ```
-var facebookEmail = "";         //your facebook e-mail here
-var facebookPassword = "";      //your facebook password
+var facebookUserId = "";         //your facebook e-mail here
+var facebookAccessToken = "";      //your facebook password
 ```
 Those two lines above, enter your email and password for Facebook. Here's an example below
 ```
-var facebookEmail = "mrupsman@southpark.com";         //your facebook e-mail here
-var facebookPassword = "hellothere";      //your facebook password
+var facebookUserId = "501934795";         //It's usually 9 numbers 
+var facebookAccessToken = "CAADoVON4jM0BAK0JhJZBQd4GCFpwp8aRhegtl2KRQmSKtz0Ymo38Wa7VvavBGap7YrZA5mWc2w9XmTOvwfTEaVwRIFGftfm29Yf4TfJEH0j6B3mrVTKsAx6bRszAASW1QEDaP7bFspiaXHz0I3exQmSNkWPcA3tr46gINvnvai5ZBJngT4POHcRo9h8XK0lnDYmHZCYfeEkHZA2dWWQXH";      //It's usually 214 characters
 ```
 
 Add events that you're interested in (Must have at least 1 to work).
@@ -72,8 +77,8 @@ Output
 Marquee
 ```
 
-## Step 5
-Using terminal or commandline, navigate to the directory and run.. 'node app.js'
+## Step 6
+Using terminal or commandline, navigate to the directory and run.. 'node app.js'. At first, it should print out all of the events that are available in the Jukely website. You can double check your selections based upon the output. If nothing is matched, you gotta check the event details you entered. Also, if the event isn't bookable yet on your app or the website, this program will fail.
 ```
 MM-Mac-3184:jukely-checker couyang$ node app.js
 Logging into Facebook.
