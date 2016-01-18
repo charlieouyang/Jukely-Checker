@@ -34,7 +34,7 @@ moment@2.11.1 node_modules/moment
 ## Step 4
 Open up Google Chrome and go to the Jukely website. Login using your Facebook. Then right click on the page and click on "Inspect Element". Then use the text search utility (Command F or Control F) to find two attributes: "_fb_uid" and "_fb_access_token". Here's a screenshot to show the 2 fields in Chrome.
 
-![alt tag](https://raw.github.com/charlieouyang/Jukely-Checker/blob/master/jukely-screenshot.png)
+![alt tag](https://github.com/charlieouyang/Jukely-Checker/blob/master/jukely-screenshot.png)
 
 ## Step 5
 Open up app.js file with your favorite editor and copy and paste those two values into the file.
