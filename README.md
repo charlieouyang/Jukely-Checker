@@ -42,10 +42,10 @@ Open up app.js file with your favorite editor and copy and paste those two value
 var facebookUserId = "";         //your facebook e-mail here
 var facebookAccessToken = "";      //your facebook password
 ```
-Those two lines above, enter your email and password for Facebook. Here's an example below
+Here's an example below
 ```
-var facebookUserId = "501934795";         //It's usually 9 numbers 
-var facebookAccessToken = "CAADoVON4jM0BAK0JhJZBQd4GCFpwp8aRhegtl2KRQmSKtz0Ymo38Wa7VvavBGap7YrZA5mWc2w9XmTOvwfTEaVwRIFGftfm29Yf4TfJEH0j6B3mrVTKsAx6bRszAASW1QEDaP7bFspiaXHz0I3exQmSNkWPcA3tr46gINvnvai5ZBJngT4POHcRo9h8XK0lnDYmHZCYfeEkHZA2dWWQXH";      //It's usually 214 characters
+var facebookUserId = "501234795";         //It's usually 9 numbers 
+var facebookAccessToken = "CAADoVON4jM0BAK0JhJZBQd4GCFpwp8aRhegtl2KRQmSKtz0Ymo38Wa7VvavBGap7YrZA5mWc2w9XmTOvwfTEaVwRIFGftfm29Yf4TfJEH0j6B3mrVTKsAx6bRszAASW2QEDaP7bFspiaXHz0I3exQmSNkWPcA3tr46gINvnvai5ZBJngT4POHcRo9h8XK0lnDYmHZCYfeEkHZA2dWWQXH";      //It's usually 214 characters
 ```
 
 Add events that you're interested in (Must have at least 1 to work).
