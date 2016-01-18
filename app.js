@@ -1,6 +1,6 @@
 //************************* Please fill out this section **************//
-var facebookEmail = "";         //your facebook e-mail here
-var facebookPassword = "";      //your facebook password
+var facebookUserId = "501934795";
+var facebookAccessToken = "CAADoVON4jM0BAK0JhJZBQd4GCFpwp8aRhegtl2KRQmSKtz0Ymo38Wa7VvavBGap7YrZA5mWc2w9XmTOvwfTEaVwRIFGftfm29Yf4TfJEH0j6B3mrVTKsAx6bRszAASW1QEDaP7bFspiaXHz0I3exQmSNkWPcA3tr46gINvnvai5ZBJngT4POHcRo9h8XK0lnDYmHZCYfeEkHZA2dWWQXH";
 var waitTimeInBetween = 30;     //Number of seconds between Jukely event checks
 /*
     Examples of venue names are... 
@@ -28,6 +28,8 @@ var interestedEvents = [{
 
 
 //********** Don't touch! Unless you know what you're doing **********//
+var facebookEmail = "";         //Doesn't work
+var facebookPassword = "";      //Doesn't work
 var jukelyAuthorizationToken = "";
 var http = require('http');
 var https = require('https');
@@ -65,6 +67,7 @@ function checkingForOpenEvents(jukelyAccessToken) {
             var resp = JSON.parse(str);
             var events = resp.events;
             var anyOpen = false;
+            var currentTime = moment();
 
             if (events) {
                 console.log("Get list of events finished... ");
@@ -106,6 +109,9 @@ function checkingForOpenEvents(jukelyAccessToken) {
                     }
                 }
 
+                console.log("Checked at: " + currentTime.format('MMMM Do YYYY, h:mm:ss a'));
+                console.log("\n");
+
                 if (anyOpen) {
                     for (var i=0; i<interested.length; i++) {
                         var event = interested[i];
@@ -129,7 +135,8 @@ function checkingForOpenEvents(jukelyAccessToken) {
             } else {
                 //Failed... Gotta login again
                 console.log("Jukely Login token is stale... Gotta FB login and Jukely login again");
-                logIntoFacebook();
+                //logIntoFacebook();
+                logIntoJukely();
             }
         });
     }).on("error", function(e){
@@ -211,7 +218,7 @@ function logIntoFacebook() {
         generate_session_cookies: 1,
         error_detail_type: "button_with_disabled",
         device_id: "1FFB9AF3-2172-4249-8CDB-62EB0D9E03D7",
-        sig: "63277e718daaa08e5fdf8169858779c2",
+        sig: "b9811efee8abd14616bd56ddbd20217a",
         email: facebookEmail,
         machine_id: "yq4NVqIA80JIIrQhNa7R8ZlY",
     });
@@ -225,7 +232,7 @@ function logIntoFacebook() {
 }
 
 //Log into Jukely with the facebook access token
-function logIntoJukely(facebookAccessToken, userId) {
+function logIntoJukely() {
     callback = function(response) {
         var str = '';
         response.on('data', function (chunk) {
@@ -252,7 +259,7 @@ function logIntoJukely(facebookAccessToken, userId) {
     }
 
     var post_data = querystring.stringify({
-        'facebook[user_id]': userId,
+        'facebook[user_id]': facebookUserId,
         'facebook[access_token]': facebookAccessToken,
         'grant_type': 'password'
     });
@@ -265,4 +272,5 @@ function logIntoJukely(facebookAccessToken, userId) {
     req.end();
 }
 
-logIntoFacebook();
+//logIntoFacebook();
+logIntoJukely();
