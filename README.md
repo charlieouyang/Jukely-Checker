@@ -39,8 +39,8 @@ Open up Google Chrome and go to the Jukely website. Login using your Facebook. T
 ## Step 5
 Open up app.js file with your favorite editor and copy and paste those two values into the file.
 ```
-var facebookUserId = "";         //your facebook e-mail here
-var facebookAccessToken = "";      //your facebook password
+var facebookUserId = "";         //your facebook user id here
+var facebookAccessToken = "";      //your facebook access token
 ```
 Here's an example below
 ```
