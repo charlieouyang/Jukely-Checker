@@ -48,6 +48,13 @@ var facebookUserId = "501234795";         //It's usually 9 numbers
 var facebookAccessToken = "CAADoVON4jM0BAK0JhJZBQd4GCFpwp8aRhegtl2KRQmSKtz0Ymo38Wa7VvavBGap7YrZA5mWc2w9XmTOvwfTEaVwRIFGftfm29Yf4TfJEH0j6B3mrVTKsAx6bRszAASW2QEDaP7bFspiaXHz0I3exQmSNkWPcA3tr46gINvnvai5ZBJngT4POHcRo9h8XK0lnDYmHZCYfeEkHZA2dWWQXH";      //It's usually 214 characters
 ```
 
+Values you can modify
+These are default values. You can modify them as how you want. The wait time shouln't be too small as you don't want Jukely server to block your fb_id and access token thinking you're trying to DDOS them. The number of spots to book is either 1 or 2.
+```
+var waitTimeInBetween = 30;     //Number of seconds between Jukely event checks
+var numberOfSpotsToBook = 1;   //Number of spots you want to book (default is 1)
+```
+
 Add events that you're interested in (Must have at least 1 to work).
 ```
 var interestedEvents = [{

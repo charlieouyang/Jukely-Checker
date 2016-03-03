@@ -2,6 +2,7 @@
 var facebookUserId = "";
 var facebookAccessToken = "";
 var waitTimeInBetween = 30;     //Number of seconds between Jukely event checks
+var numberOfSpotsToBook = 1;   //Number of spots you want to book (default is 1)
 /*
     Examples of venue names are... 
         Space Ibiza NY
@@ -23,6 +24,9 @@ var interestedEvents = [{
 },{
     headlinerName: "Chris Liebing",
     venue: "Pacha"
+},{
+    headlinerName: "Sons of an Illustrious Father",
+    venue: "Mercury Lounge"
 }];
 //********************************************************************//
 
@@ -75,7 +79,7 @@ function checkingForOpenEvents(jukelyAccessToken) {
                 //Success! Go through events...
                 for (var i=0; i<events.length; i++) {
                     var event = events[i];
-                    var status = event.status === 2 ? "Open": "Closed";
+                    var status = event.status === 1 ? "Open": "Closed";
                     var headliner = event.headliner;
                     var venue = event.venue;
 
@@ -92,7 +96,7 @@ function checkingForOpenEvents(jukelyAccessToken) {
 
                     for (var i=0; i<events.length; i++) {
                         var event = events[i];
-                        var status = event.status === 2 ? "Open": "Closed";
+                        var status = event.status === 1 ? "Open": "Closed";
                         var headliner = event.headliner;
                         var venue = event.venue;
                         var startDate = moment(event.starts_at);
@@ -114,7 +118,7 @@ function checkingForOpenEvents(jukelyAccessToken) {
                 console.log("\nHere are the interested events that are matched... \n");
                 for (var i=0; i<interested.length; i++) {
                     var event = interested[i];
-                    var status = event.status === 2 ? "Open": "Closed";
+                    var status = event.status === 1 ? "Open": "Closed";
                     var headliner = event.headliner;
                     var venue = event.venue;
                     var startDate = moment(event.starts_at);
@@ -126,6 +130,7 @@ function checkingForOpenEvents(jukelyAccessToken) {
                     console.log("Venue: " + venue.name);
                     console.log("City: " + venue.city);
                     console.log("Status: " + status);
+                    console.log("You're trying to book: " + numberOfSpotsToBook + " spots");
                     console.log("\n");
 
                     if (status === "Open") {
@@ -139,7 +144,7 @@ function checkingForOpenEvents(jukelyAccessToken) {
                 if (anyOpen) {
                     for (var i=0; i<interested.length; i++) {
                         var event = interested[i];
-                        var status = event.status === 2 ? "Open": "Closed";
+                        var status = event.status === 1 ? "Open": "Closed";
                         var headliner = event.headliner;
                         var venue = event.venue;
 
@@ -158,7 +163,7 @@ function checkingForOpenEvents(jukelyAccessToken) {
                 }
             } else {
                 //Failed... Gotta login again
-                console.log("Jukely Login token is stale... Gotta FB login and Jukely login again");
+                console.log("Jukely Login token is stale... Need to refresh your jukely browser and get the FB Id and token again");
                 //logIntoFacebook();
                 logIntoJukely();
             }
@@ -178,8 +183,10 @@ function bookEvent(event) {
         response.on('end', function () {
             var eventBookResponse = JSON.parse(str);
 
-            if (eventBookResponse.errors) {
-                console.log("Booking failed (Probably event not opened yet)... Trying again in " + waitTimeInBetween + " seconds");
+            if (eventBookResponse.errors || eventBookResponse.error) {
+                console.log("Booking failed (maybe event not opened yet or number of spots you're reserving is invalid)... Trying again in " + waitTimeInBetween + " seconds");
+                console.log("Detailed error block: ");
+                console.log(eventBookResponse);
                 setTimeout(function(){ 
                     checkingForOpenEvents(); 
                 }, waitTimeInBetween * 1000);
@@ -191,7 +198,7 @@ function bookEvent(event) {
 
     var post_data = querystring.stringify({
         "id": event.parse_id,
-        "pass_count": 1
+        "pass_count": numberOfSpotsToBook
     });
 
     postOptions.headers["Content-Type"] = 'application/x-www-form-urlencoded';
